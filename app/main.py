@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
 import requests
+import os
 
 app = Flask(__name__)
 
+# Get MongoDB endpoint
+database_host = os.getenv("MONGODB_HOST", "localhost")
+database_port = os.getenv("MONGODB_PORT", "27017")
+
 # MongoDB Configuration
-mongo_client = MongoClient("mongodb://localhost:27017/")  # UMongoDB connection string
+mongo_client = MongoClient(f"mongodb://{database_host}:{database_port}/")  # UMongoDB connection string
 db = mongo_client["dictionary"]  # MongoDB database name
 collection = db["wordscollection"]  # MongoDB collection name
 
