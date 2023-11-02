@@ -42,3 +42,8 @@ To build an image, use the command
 To run a container, use the command
 
 ```docker run -d --rm --name dic-backend -p 8088:8088 -e MONGODB_HOST=host.docker.internal apinyarr/dic-backend:test```
+
+## Run using Docker Compose
+To run using Docker Compose (explicit the compose file name)
+
+```docker compose -f docker-compose.yaml up -d```
