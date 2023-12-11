@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dic-config
+  namespace: {{ .Values.namespace }}
+data: # This configmap is used by Frontend and Backend
+  backend_url: {{ .Values.frontend.backend }}
+  mongodb_host: {{ .Values.backend.mongodb.host }}
+  mongodb_port: {{ .Values.backend.mongodb.port }}

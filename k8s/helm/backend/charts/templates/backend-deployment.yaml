@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dic-backend-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: dic-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dic-backend
+  template:
+    metadata:
+      labels:
+        app: dic-backend
+    spec:
+      containers:
+      - name: dic-backend
+        image: "{{ .Values.backend.image }}:{{ .Values.backend.tag }}"
+        env:
+        - name: MONGODB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: dic-config
+              key: mongodb_host
+        - name: MONGODB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: dic-config
+              key: mongodb_port
+        ports:
+        - containerPort: {{ .Values.backend.containerPort }}
+          protocol: TCP
+        livenessProbe:
+          failureThreshold: 3
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 2
+          timeoutSeconds: 4
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 254Mi
