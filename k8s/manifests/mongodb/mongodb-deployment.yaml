@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: dic-mongodb
-          image: mongo:6.0.4-jammy
+          image: mongo:4.4.18-focal
           ports:
           - containerPort: 27017
             protocol: TCP
