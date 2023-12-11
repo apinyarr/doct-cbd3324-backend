@@ -10,3 +10,6 @@ backend:
   service:
     type: NodePort
   containerPort: 8088
+  mongodb:
+    host: dic-mongodb-service
+    port: 27017

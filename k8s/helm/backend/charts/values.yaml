@@ -1,0 +1,15 @@
+---
+namespace: dictionary-namespace
+
+frontend:
+  backend: "backend-service"
+
+backend:
+  image: apinyarr/dic-backend:v1.0
+  tag: v1.0
+  service:
+    type: ClusterIP
+  containerPort: 8088
+  mongodb:
+    host: dic-mongodb-service
+    port: 27017

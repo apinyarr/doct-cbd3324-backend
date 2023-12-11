@@ -35,14 +35,14 @@ spec:
         livenessProbe:
           failureThreshold: 3
           tcpSocket:
-            port: 8080
+            port: {{ .Values.backend.containerPort }}
           initialDelaySeconds: 10
           periodSeconds: 10
         readinessProbe:
           failureThreshold: 3
           httpGet:
             path: /
-            port: 8080
+            port: {{ .Values.backend.containerPort }}
             scheme: HTTP
           initialDelaySeconds: 15
           periodSeconds: 10

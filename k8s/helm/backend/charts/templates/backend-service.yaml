@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: dic-backend
+  ports:
+    - protocol: TCP
+      port: 8088
+      targetPort: 8088
+      nodePort: 30088
+  type: {{ .Values.backend.service.type }}
